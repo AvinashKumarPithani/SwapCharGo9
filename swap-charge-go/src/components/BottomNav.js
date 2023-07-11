@@ -9,6 +9,9 @@ import { useEffect, useRef, useState } from "react";
 import ClusterMap from "./map/ClusterMap";
 import Rooms from "./rooms/Rooms";
 import AddRoom from "./addRoom/AddRoom";
+import Protected from "./protected/Protected";
+import React from 'react';
+import 'mapbox-gl/dist/mapbox-gl.css';
 
 const BottomNav = () => {
   const [value, setValue] = useState(0);
@@ -22,7 +25,11 @@ const BottomNav = () => {
         {
           0: <ClusterMap />,
           1: <Rooms />,
-          2: <AddRoom />,
+          2: (
+            <Protected>
+              <AddRoom setPage={setValue} />
+            </Protected>
+          ),
         }[value]
       }
       <Paper
@@ -35,7 +42,7 @@ const BottomNav = () => {
           onChange={(e, newValue) => setValue(newValue)}
         >
           <BottomNavigationAction label="Map" icon={<LocationOn />} />
-          <BottomNavigationAction label="Rooms" icon={<Bed />} />
+          <BottomNavigationAction label="Stations" icon={<Bed />} />
           <BottomNavigationAction label="Add" icon={<AddLocationAlt />} />
         </BottomNavigation>
       </Paper>

@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Map from "./pages/Map";
 import ContextProvider from "./context/ContextProvider";
+import 'mapbox-gl/dist/mapbox-gl.css';
 
 function App() {
   return (
