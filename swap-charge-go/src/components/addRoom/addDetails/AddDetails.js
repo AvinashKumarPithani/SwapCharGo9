@@ -45,7 +45,7 @@ const AddDetails = () => {
           row
           onChange={handleCostTypeChange}
         >
-          <FormControlLabel value={0} control={<Radio />} label="Free Stay" />
+          <FormControlLabel value={0} control={<Radio />} label="Free with Subscription" />
           <FormControlLabel value={1} control={<Radio />} label="Nominal Fee" />
           {Boolean(costType) && (
             <TextField

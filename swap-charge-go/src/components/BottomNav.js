@@ -5,6 +5,7 @@ import {
   Paper,
 } from "@mui/material";
 import { AddLocationAlt, Bed, LocationOn } from "@mui/icons-material";
+import EvStationIcon from '@mui/icons-material/EvStation';
 import { useEffect, useRef, useState } from "react";
 import ClusterMap from "./map/ClusterMap";
 import Rooms from "./rooms/Rooms";
@@ -42,7 +43,7 @@ const BottomNav = () => {
           onChange={(e, newValue) => setValue(newValue)}
         >
           <BottomNavigationAction label="Map" icon={<LocationOn />} />
-          <BottomNavigationAction label="Stations" icon={<Bed />} />
+          <BottomNavigationAction label="Stations" icon={<EvStationIcon />} />
           <BottomNavigationAction label="Add" icon={<AddLocationAlt />} />
         </BottomNavigation>
       </Paper>

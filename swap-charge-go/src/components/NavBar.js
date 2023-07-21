@@ -42,7 +42,7 @@ const NavBar = () => {
               noWrap
               sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}
             >
-              You Are Welcome
+              Swap Charge & Go
             </Typography>
             <Typography
               variant="h6"
@@ -50,7 +50,7 @@ const NavBar = () => {
               noWrap
               sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
             >
-              YRW
+              SCG
             </Typography>
             {!currentUser ? (
               <Button
