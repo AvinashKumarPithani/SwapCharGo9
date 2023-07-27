@@ -5,14 +5,14 @@ import {
   Paper,
 } from "@mui/material";
 import { AddLocationAlt, Bed, LocationOn } from "@mui/icons-material";
-import EvStationIcon from '@mui/icons-material/EvStation';
+import EvStationIcon from "@mui/icons-material/EvStation";
 import { useEffect, useRef, useState } from "react";
 import ClusterMap from "./map/ClusterMap";
 import Rooms from "./rooms/Rooms";
 import AddRoom from "./addRoom/AddRoom";
 import Protected from "./protected/Protected";
-import React from 'react';
-import 'mapbox-gl/dist/mapbox-gl.css';
+import React from "react";
+import "mapbox-gl/dist/mapbox-gl.css";
 
 const BottomNav = () => {
   const [value, setValue] = useState(0);
@@ -25,7 +25,11 @@ const BottomNav = () => {
       {
         {
           0: <ClusterMap />,
-          1: <Rooms />,
+          1: (
+            <Protected>
+              <Rooms />
+            </Protected>
+          ),
           2: (
             <Protected>
               <AddRoom setPage={setValue} />

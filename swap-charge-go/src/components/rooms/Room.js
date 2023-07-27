@@ -2,6 +2,7 @@ import {
   AppBar,
   Avatar,
   Box,
+  Button,
   Container,
   Dialog,
   IconButton,
@@ -49,6 +50,30 @@ const Room = () => {
   const handleClose = () => {
     dispatch({ type: "UPDATE_ROOM", payload: null });
   };
+
+  const [counter, setCounter] = useState(50);
+
+  // Function to handle the button click and decrement the counter
+  const handleButtonClick = () => {
+    setCounter((prevCounter) => {
+      // Decrement the counter by 1
+      const newCounter = prevCounter - 1;
+      return newCounter >= 0 ? newCounter : 0;
+    });
+    alert("One slot has booked successfully");
+  };
+
+  // Function to increment the counter by 1 every 30 minutes (up to a maximum of 50)
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCounter((prevCounter) => {
+        const newCounter = prevCounter + 1;
+        return newCounter <= 50 ? newCounter : 50;
+      });
+    }, 30 * 60 * 1000); // 30 minutes in milliseconds
+
+    return () => clearInterval(interval);
+  }, []);
   return (
     <Dialog
       fullScreen
@@ -164,6 +189,30 @@ const Room = () => {
               {"Details: "}
             </Typography>
             <Typography component="span">{room?.description}</Typography>
+          </Stack>
+          <Stack
+            direction="row"
+            sx={{
+              justifyContent: "space-between",
+              flexWrap: "wrap",
+            }}
+          >
+            <Box>
+              <Typography variant="h6" component="span">
+                {"Swappable Batteries: "}
+              </Typography>
+              <Typography component="span">{counter}</Typography>
+            </Box>
+            <Box>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handleButtonClick}
+                sx={{ mt: 2 }} // Add margin-top for spacing
+              >
+                Book Slot
+              </Button>
+            </Box>
           </Stack>
         </Stack>
       </Container>

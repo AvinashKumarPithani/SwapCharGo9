@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useValue } from "../../context/ContextProvider";
 import { getRooms } from "../../actions/room";
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
+import { GeolocateControl, NavigationControl } from "react-map-gl";
 import Supercluster from "supercluster";
 import "./cluster.css";
 import { Avatar, Box, Paper, Tooltip } from "@mui/material";
 import GeocoderInput from "../sidebar/GeocoderInput";
 import PopupRoom from "./PopupRoom";
+import Geocoder from "../addRoom/addLocation/Geocoder";
 
 const supercluster = new Supercluster({
   radius: 75,
@@ -140,6 +142,18 @@ const ClusterMap = () => {
             <PopupRoom {...{ popupInfo }} />
           </Popup>
         )}
+        <GeolocateControl
+          position="top-left"
+          trackUserLocation
+          onGeolocate={(e) =>
+            dispatch({
+              type: "UPDATE_LOCATION",
+              payload: { lng: e.coords.longitude, lat: e.coords.latitude },
+            })
+          }
+        />
+        <Geocoder />
+        <NavigationControl position="top-left" />
       </ReactMapGL>
     </Box>
   );

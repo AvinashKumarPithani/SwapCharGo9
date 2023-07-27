@@ -6,6 +6,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/lazy";
 import { useValue } from "../../context/ContextProvider";
+import Protected from "../protected/Protected";
 
 const PopupRoom = ({ popupInfo }) => {
   const { title, description, price, images } = popupInfo;
@@ -40,22 +41,24 @@ const PopupRoom = ({ popupInfo }) => {
         >
           {images.map((url) => (
             <SwiperSlide key={url}>
-              <Box
-                component="img"
-                src={url}
-                alt="room"
-                sx={{
-                  height: 255,
-                  display: "block",
-                  overflow: "hidden",
-                  width: "100%",
-                  cursor: "pointer",
-                  objectFit: "cover",
-                }}
-                onClick={() =>
-                  dispatch({ type: "UPDATE_ROOM", payload: popupInfo })
-                }
-              />
+              <Protected>
+                <Box
+                  component="img"
+                  src={url}
+                  alt="room"
+                  sx={{
+                    height: 255,
+                    display: "block",
+                    overflow: "hidden",
+                    width: "100%",
+                    cursor: "pointer",
+                    objectFit: "cover",
+                  }}
+                  onClick={() =>
+                    dispatch({ type: "UPDATE_ROOM", payload: popupInfo })
+                  }
+                />
+              </Protected>
             </SwiperSlide>
           ))}
         </Swiper>
