@@ -25,6 +25,7 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/lazy";
 import "swiper/css/zoom";
 import "./swiper.css";
+import { handleButtonClick } from "../../actions/room";
 
 const Transition = forwardRef((props, ref) => {
   return <Slide direction="up" {...props} ref={ref} />;
@@ -32,7 +33,7 @@ const Transition = forwardRef((props, ref) => {
 
 const Room = () => {
   const {
-    state: { room },
+    state: { room, currentUser },
     dispatch,
   } = useValue();
 
@@ -51,29 +52,12 @@ const Room = () => {
     dispatch({ type: "UPDATE_ROOM", payload: null });
   };
 
-  const [counter, setCounter] = useState(50);
-
   // Function to handle the button click and decrement the counter
-  const handleButtonClick = () => {
-    setCounter((prevCounter) => {
-      // Decrement the counter by 1
-      const newCounter = prevCounter - 1;
-      return newCounter >= 0 ? newCounter : 0;
-    });
-    alert("One slot has booked successfully");
+  const handleClick = () => {
+    handleButtonClick(room, currentUser, dispatch);
+    alert("You have successfully booked a slot");
   };
 
-  // Function to increment the counter by 1 every 30 minutes (up to a maximum of 50)
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCounter((prevCounter) => {
-        const newCounter = prevCounter + 1;
-        return newCounter <= 50 ? newCounter : 50;
-      });
-    }, 30 * 60 * 1000); // 30 minutes in milliseconds
-
-    return () => clearInterval(interval);
-  }, []);
   return (
     <Dialog
       fullScreen
@@ -201,16 +185,16 @@ const Room = () => {
               <Typography variant="h6" component="span">
                 {"Swappable Batteries: "}
               </Typography>
-              <Typography component="span">{counter}</Typography>
+              <Typography component="span">{room?.slots}</Typography>
             </Box>
             <Box>
               <Button
                 variant="contained"
                 color="primary"
-                onClick={handleButtonClick}
+                onClick={handleClick}
                 sx={{ mt: 2 }} // Add margin-top for spacing
               >
-                Book Slot
+                Book a Slot
               </Button>
             </Box>
           </Stack>

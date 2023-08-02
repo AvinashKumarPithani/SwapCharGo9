@@ -35,7 +35,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         images: [],
-        details: { title: "", description: "", price: 0 },
+        details: { title: "", description: "", price: 0, slots: 50 },
         location: { lng: 0, lat: 0 },
       };
 
@@ -77,6 +77,15 @@ const reducer = (state, action) => {
 
     case "UPDATE_ROOM":
       return { ...state, room: action.payload };
+
+    case "INCREMENT_SLOTS":
+      // Increment the slots value by one
+      return {
+        ...state,
+        room: state.room
+          ? { ...state.room, slots: state.room.slots + 1 }
+          : null,
+      };
 
     default:
       throw new Error("No matched action!");

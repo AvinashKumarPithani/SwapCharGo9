@@ -85,6 +85,8 @@ const AddRoom = ({ setPage }) => {
       lng: location.lng,
       lat: location.lat,
       price: details.price,
+      slots: details.slots,
+      maxSlots: details.maxSlots,
       title: details.title,
       description: details.description,
       images,

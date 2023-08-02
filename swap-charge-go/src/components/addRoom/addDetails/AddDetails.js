@@ -14,7 +14,7 @@ import InfoField from "./InfoField";
 const AddDetails = () => {
   const {
     state: {
-      details: { title, description, price },
+      details: { title, description, price, slots },
     },
     dispatch,
   } = useValue();
@@ -45,7 +45,11 @@ const AddDetails = () => {
           row
           onChange={handleCostTypeChange}
         >
-          <FormControlLabel value={0} control={<Radio />} label="Free with Subscription" />
+          <FormControlLabel
+            value={0}
+            control={<Radio />}
+            label="Free with Subscription"
+          />
           <FormControlLabel value={1} control={<Radio />} label="Nominal Fee" />
           {Boolean(costType) && (
             <TextField
@@ -76,6 +80,17 @@ const AddDetails = () => {
         }}
         minLength={10}
         optionalProps={{ multiline: true, rows: 4 }}
+      />
+      <InfoField
+        mainProps={{
+          name: "slots",
+          label: "Number of Slots",
+          value: slots,
+        }}
+        minLength={2} // Adjust the minimum length if needed
+        optionalProps={{
+          inputProps: { type: "number", min: 50 }, // Set the type and other attributes here
+        }}
       />
     </Stack>
   );
