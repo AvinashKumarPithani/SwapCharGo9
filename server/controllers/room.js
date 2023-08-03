@@ -31,7 +31,7 @@ export const updateRoom = tryCatch(async (req, res) => {
   });
 
   if (!updatedRoom) {
-    return res.status(404).json({ success: false, message: "Room not found" });
+    return res.status(404).json({ success: false, message: "Station not found" });
   }
 
   res.status(200).json({ success: true, result: updatedRoom });

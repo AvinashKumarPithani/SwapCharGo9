@@ -183,7 +183,7 @@ const Room = () => {
           >
             <Box>
               <Typography variant="h6" component="span">
-                {"Swappable Batteries: "}
+                {"Slots Availablility: "}
               </Typography>
               <Typography component="span">{room?.slots}</Typography>
             </Box>

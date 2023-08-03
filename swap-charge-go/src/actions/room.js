@@ -15,7 +15,7 @@ export const createRoom = async (room, currentUser, dispatch, setPage) => {
       payload: {
         open: true,
         severity: "success",
-        message: "The room has been added successfully",
+        message: "The station has been added successfully",
       },
     });
     dispatch({ type: "RESET_ROOM" });
