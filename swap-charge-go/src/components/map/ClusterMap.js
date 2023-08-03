@@ -8,7 +8,6 @@ import "./cluster.css";
 import { Avatar, Box, Paper, Tooltip } from "@mui/material";
 import GeocoderInput from "../sidebar/GeocoderInput";
 import PopupRoom from "./PopupRoom";
-import Geocoder from "../addRoom/addLocation/Geocoder";
 
 const supercluster = new Supercluster({
   radius: 75,
@@ -143,7 +142,7 @@ const ClusterMap = () => {
           </Popup>
         )}
         <GeolocateControl
-          position="top-left"
+          position="top-right"
           trackUserLocation
           onGeolocate={(e) =>
             dispatch({
@@ -152,8 +151,7 @@ const ClusterMap = () => {
             })
           }
         />
-        <Geocoder />
-        <NavigationControl position="top-left" />
+        <NavigationControl position="top-right" />
       </ReactMapGL>
     </Box>
   );
