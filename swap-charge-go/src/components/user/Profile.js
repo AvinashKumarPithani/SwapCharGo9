@@ -13,6 +13,18 @@ import { Close, Send } from "@mui/icons-material";
 import { useValue } from "../../context/ContextProvider";
 import { useRef } from "react";
 import { updateProfile } from "../../actions/user";
+import { styled } from '@mui/material/styles';
+
+const ColorButton = styled(Button)(({ theme }) => ({
+  backgroundColor: "whitesmoke",
+  borderColor:"black",
+  color:"black",
+  '&:hover': {
+    backgroundColor:"grey",
+    borderColor:"black",
+    color:"black",
+  },
+}));
 
 const Profile = () => {
   const {
@@ -49,7 +61,7 @@ const Profile = () => {
             position: "absolute",
             top: 8,
             right: 8,
-            color: (theme) => theme.palette.grey[500],
+            //color: (theme) => theme.palette.grey[500],
           }}
           onClick={handleClose}
         >
@@ -85,14 +97,14 @@ const Profile = () => {
             />
             <Avatar
               src={profile.photoURL}
-              sx={{ width: 75, height: 75, cursor: "pointer" }}
+              sx={{ width: 75, height: 75, cursor: "pointer", backgroundColor:"whitesmoke" }}
             />
           </label>
         </DialogContent>
         <DialogActions sx={{ px: "19px" }}>
-          <Button type="submit" variant="contained" endIcon={<Send />}>
+          <ColorButton type="submit" variant="outlined" endIcon={<Send />}>
             Update
-          </Button>
+          </ColorButton>
         </DialogActions>
       </form>
     </Dialog>
