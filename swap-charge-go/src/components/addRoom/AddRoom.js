@@ -14,6 +14,17 @@ import AddDetails from "./addDetails/AddDetails";
 import AddImages from "./addImages/AddImages";
 import AddLocation from "./addLocation/AddLocation";
 import { createRoom } from "../../actions/room";
+import { styled } from '@mui/material/styles';
+
+const ColorButton = styled(Button)(({ theme }) => ({
+  backgroundColor: "white",
+  color:"black",
+  borderColor: 'black',
+  '&:hover': {
+     backgroundColor: "black",
+     color:"white"
+  },
+}));
 
 const AddRoom = ({ setPage }) => {
   const {
@@ -117,16 +128,17 @@ const AddRoom = ({ setPage }) => {
         }
 
         <Stack direction="row" sx={{ pt: 2, justifyContent: "space-around" }}>
-          <Button
+          <ColorButton
+            variant="outlined"
             color="inherit"
             disabled={!activeStep}
             onClick={() => setActiveStep((activeStep) => activeStep - 1)}
           >
             Back
-          </Button>
-          <Button disabled={checkDisabled()} onClick={handleNext}>
+          </ColorButton>
+          <ColorButton variant="outlined" disabled={checkDisabled()} onClick={handleNext}>
             Next
-          </Button>
+          </ColorButton>
         </Stack>
         {showSubmit && (
           <Stack sx={{ alignItems: "center" }}>
