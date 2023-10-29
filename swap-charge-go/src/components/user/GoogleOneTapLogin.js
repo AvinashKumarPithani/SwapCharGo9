@@ -3,6 +3,17 @@ import { Button } from "@mui/material";
 import React, { useState } from "react";
 import { useValue } from "../../context/ContextProvider";
 import jwtDecode from "jwt-decode";
+import { styled } from '@mui/material/styles';
+
+const ColorButton = styled(Button)(({ theme }) => ({
+  backgroundColor: "white",
+  borderColor:"black",
+  color:"black",
+  '&:hover': {
+    backgroundColor: "black",
+    color:"white",
+  },
+}));
 
 const GoogleOneTapLogin = () => {
   const { dispatch } = useValue();
@@ -45,14 +56,14 @@ const GoogleOneTapLogin = () => {
     }
   };
   return (
-    <Button
+    <ColorButton
       variant="outlined"
       startIcon={<Google />}
       disabled={disabled}
       onClick={handleGoogleLogin}
     >
       Login with Google
-    </Button>
+    </ColorButton>
   );
 };
 
