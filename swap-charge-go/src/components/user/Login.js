@@ -14,6 +14,17 @@ import { login, register } from '../../actions/user';
 import { useValue } from '../../context/ContextProvider';
 import GoogleOneTapLogin from './GoogleOneTapLogin';
 import PasswordField from './PasswordField';
+import { styled } from '@mui/material/styles';
+
+const ColorButton = styled(Button)(({ theme }) => ({
+  backgroundColor: "white",
+  borderColor:"black",
+  color:"black",
+  '&:hover': {
+    backgroundColor: "black",
+    color:"white",
+  },
+}));
 
 const Login = () => {
   const {
@@ -109,9 +120,9 @@ const Login = () => {
           )}
         </DialogContent>
         <DialogActions sx={{ px: '19px' }}>
-          <Button type="submit" variant="contained" endIcon={<Send />}>
+          <ColorButton type="submit" variant="outlined" endIcon={<Send />}>
             Submit
-          </Button>
+          </ColorButton>
         </DialogActions>
       </form>
       <DialogActions sx={{ justifyContent: 'left', p: '5px 24px' }}>
