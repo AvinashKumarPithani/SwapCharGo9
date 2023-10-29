@@ -28,6 +28,7 @@ const UserIcons = () => {
       <Tooltip title="Open User Settings">
         <IconButton onClick={(e) => setAnchorUserMenu(e.currentTarget)}>
           <Avatar src={currentUser?.photoURL} alt={currentUser?.name}>
+            sx={{ width: 30, height: 30, cursor: "pointer" , backgroundColor:"whitesmoke"}}
             {currentUser?.name?.charAt(0).toUpperCase()}
           </Avatar>
         </IconButton>
