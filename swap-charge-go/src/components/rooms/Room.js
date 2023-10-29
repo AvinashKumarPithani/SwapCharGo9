@@ -13,6 +13,8 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
+
+import { styled } from '@mui/material/styles';
 import { forwardRef, useEffect, useState } from "react";
 import { useValue } from "../../context/ContextProvider";
 import { Close, StarBorder } from "@mui/icons-material";
@@ -25,6 +27,26 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/lazy";
 import "swiper/css/zoom";
 import "./swiper.css";
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+
+const ColorButton = styled(Button)(({ theme }) => ({
+  backgroundColor: "black",
+  color:"white",
+  '&:hover': {
+     backgroundColor: "white",
+     borderColor: 'black',
+     color:"black"
+  },
+}));
+
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+    primary: {
+      main: '#ffffff',
+    },
+  },
+});
 
 const Transition = forwardRef((props, ref) => {
   return <Slide direction="up" {...props} ref={ref} />;
@@ -81,6 +103,7 @@ const Room = () => {
       onClose={handleClose}
       TransitionComponent={Transition}
     >
+      <ThemeProvider theme={darkTheme}>
       <AppBar position="relative">
         <Toolbar>
           <Typography variant="h6" component="h3" sx={{ ml: 2, flex: 1 }}>
@@ -91,7 +114,9 @@ const Room = () => {
           </IconButton>
         </Toolbar>
       </AppBar>
+       </ThemeProvider>
       <Container sx={{ pt: 5 }}>
+        <ThemeProvider theme={darkTheme}>
         <Swiper
           modules={[Navigation, Autoplay, EffectCoverflow, Lazy, Zoom]}
           centeredSlides
@@ -129,6 +154,7 @@ const Room = () => {
             <Avatar src={room?.uPhoto} />
           </Tooltip>
         </Swiper>
+        </ThemeProvider>
         <Stack sx={{ p: 3 }} spacing={2}>
           <Stack
             direction="row"
@@ -204,14 +230,14 @@ const Room = () => {
               <Typography component="span">{counter}</Typography>
             </Box>
             <Box>
-              <Button
-                variant="contained"
-                color="primary"
+              <ColorButton
+                variant="outlined"
+                color="inherit"
                 onClick={handleButtonClick}
                 sx={{ mt: 2 }} // Add margin-top for spacing
               >
                 Book Slot
-              </Button>
+              </ColorButton>
             </Box>
           </Stack>
         </Stack>
