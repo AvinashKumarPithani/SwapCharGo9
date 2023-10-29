@@ -3,6 +3,8 @@ import {
   BottomNavigationAction,
   Box,
   Paper,
+  ThemeProvider,
+  createTheme,
 } from "@mui/material";
 import { AddLocationAlt, Bed, LocationOn } from "@mui/icons-material";
 import EvStationIcon from "@mui/icons-material/EvStation";
@@ -14,6 +16,14 @@ import Protected from "./protected/Protected";
 import React from "react";
 import "mapbox-gl/dist/mapbox-gl.css";
 
+const Theme = createTheme({
+  palette: {
+    primary: {
+      main: '#000000',
+    },
+  },
+});
+
 const BottomNav = () => {
   const [value, setValue] = useState(0);
   const ref = useRef();
@@ -21,6 +31,7 @@ const BottomNav = () => {
     ref.current.ownerDocument.body.scrollTop = 0;
   }, [value]);
   return (
+    <ThemeProvider theme={Theme}>
     <Box ref={ref}>
       {
         {
@@ -52,6 +63,7 @@ const BottomNav = () => {
         </BottomNavigation>
       </Paper>
     </Box>
+    </ThemeProvider>
   );
 };
 
