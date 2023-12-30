@@ -13,6 +13,27 @@ import { Lock, Menu } from "@mui/icons-material";
 import { useValue } from "../context/ContextProvider";
 import UserIcons from "./user/UserIcons";
 import Sidebar from "./sidebar/Sidebar";
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
+
+const ColorButton = styled(Button)(({ theme }) => ({
+  backgroundColor: "black",
+  color:"white",
+  '&:hover': {
+     backgroundColor: "white",
+     borderColor: 'black',
+     color:"black"
+  },
+}));
+
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+    primary: {
+      main: '#ffffff',
+    },
+  },
+});
 
 const NavBar = () => {
   const {
@@ -24,48 +45,51 @@ const NavBar = () => {
 
   return (
     <>
-      <AppBar>
-        <Container maxWidth="lg">
-          <Toolbar disableGutters>
-            <Box sx={{ mr: 1 }}>
-              <IconButton
-                size="large"
-                color="inherit"
-                onClick={() => setIsOpen(true)}
+      <ThemeProvider theme={darkTheme}>
+        <AppBar>
+          <Container maxWidth="lg">
+            <Toolbar disableGutters>
+              <Box sx={{ mr: 1 }}>
+                <IconButton
+                  size="large"
+                  color="inherit"
+                  onClick={() => setIsOpen(true)}
+                >
+                  <Menu />
+                </IconButton>
+              </Box>
+              <Typography
+                variant="h6"
+                component="h1"
+                noWrap
+                sx={{ flexGrow: 1}}
               >
-                <Menu />
-              </IconButton>
-            </Box>
-            <Typography
-              variant="h6"
-              component="h1"
-              noWrap
-              sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}
-            >
-              Swap Charge & Go
-            </Typography>
-            <Typography
-              variant="h6"
-              component="h1"
-              noWrap
-              sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
-            >
-              SCG
-            </Typography>
-            {!currentUser ? (
-              <Button
-                color="inherit"
-                startIcon={<Lock />}
-                onClick={() => dispatch({ type: "OPEN_LOGIN" })}
+                Swap Charge & Go
+              </Typography>
+              <Typography
+                variant="h6"
+                component="h1"
+                noWrap
+                sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
               >
-                Login
-              </Button>
-            ) : (
-              <UserIcons />
-            )}
-          </Toolbar>
-        </Container>
-      </AppBar>
+                SCG
+              </Typography>
+              {!currentUser ? (
+                <ColorButton
+                  variant="outlined"
+                  color="inherit"
+                  startIcon={<Lock />}
+                  onClick={() => dispatch({ type: "OPEN_LOGIN" })}
+                >
+                  Login
+                </ColorButton>
+              ) : (
+                <UserIcons />
+              )}
+            </Toolbar>
+          </Container>
+        </AppBar>
+      </ThemeProvider>
       <Toolbar />
       <Sidebar {...{ isOpen, setIsOpen }} />
     </>
