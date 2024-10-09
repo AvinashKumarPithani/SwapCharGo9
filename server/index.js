@@ -14,7 +14,12 @@ const app = express();
 app.use(cors({
   origin: process.env.CLIENT_URL, // Allow requests from your client URL
   methods: "GET, POST, PUT, PATCH, DELETE", // Allowed methods
-  allowedHeaders: "X-Requested-With, Content-Type, Authorization" // Allowed headers
+  allowedHeaders: [
+    "X-Requested-With", 
+    "Content-Type", 
+    "Authorization", 
+    "Accept"
+  ] // Allowed headers
 }));
 
 // app.use((req, res, next) => {
