@@ -1,6 +1,6 @@
 ## Contributors
 
-- [Priyanka Pragada](https://github.com/Priya-49) - Developed the original HTML code for the home page.
+- [Priyanka Pragada](https://github.com/Priya-49) - Developed the original HTML code for the home page and contributed to styling and UI enhancements of the application.
 - [Avinash Kumar Pithani](https://github.com/AvinashKumarPithani) - Converted the home page to React.js and implemented the map page functionality, including:
   - Viewing nearby stations on the clustered map
   - Displaying detailed information for specific stations
