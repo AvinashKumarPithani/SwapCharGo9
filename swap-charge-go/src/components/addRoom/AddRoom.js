@@ -92,12 +92,15 @@ const AddRoom = ({ setPage }) => {
     createRoom(room, currentUser, dispatch, setPage);
   };
   return (
-    <Container sx={{ my: 4 }}>
+    <Container sx={{ my: { xs: 2, sm: 4 }, px: { xs: 2, sm: 3 } }}>
       <Stepper
         alternativeLabel
         nonLinear
         activeStep={activeStep}
-        sx={{ mb: 3 }}
+        sx={{
+          mb: 3,
+          "& .MuiStepLabel-label": { fontWeight: 600 },
+        }}
       >
         {steps.map((step, index) => (
           <Step key={step.label} completed={step.completed}>
@@ -116,15 +119,19 @@ const AddRoom = ({ setPage }) => {
           }[activeStep]
         }
 
-        <Stack direction="row" sx={{ pt: 2, justifyContent: "space-around" }}>
+        <Stack
+          direction="row"
+          sx={{ pt: 2, justifyContent: "space-between", maxWidth: 500, mx: "auto" }}
+        >
           <Button
+            variant="outlined"
             color="inherit"
             disabled={!activeStep}
             onClick={() => setActiveStep((activeStep) => activeStep - 1)}
           >
             Back
           </Button>
-          <Button disabled={checkDisabled()} onClick={handleNext}>
+          <Button variant="outlined" disabled={checkDisabled()} onClick={handleNext}>
             Next
           </Button>
         </Stack>

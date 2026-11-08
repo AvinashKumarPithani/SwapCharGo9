@@ -17,18 +17,19 @@ const Rooms = () => {
     dispatch,
   } = useValue();
   return (
-    <Container>
+    <Container sx={{ py: { xs: 2, sm: 3 }, px: { xs: 2, sm: 3 } }}>
       <ImageList
         gap={12}
         sx={{
-          mb: 8,
+          mb: 10,
+          gap: { xs: 2, sm: 2.5 },
           gridTemplateColumns:
             "repeat(auto-fill, minmax(280px, 1fr))!important",
         }}
       >
         {filteredRooms.map((room) => (
           <Card key={room._id}>
-            <ImageListItem sx={{ height: "100% !important" }}>
+            <ImageListItem sx={{ height: "100% !important", overflow: "hidden" }}>
               <ImageListItemBar
                 sx={{
                   background:
@@ -46,7 +47,13 @@ const Rooms = () => {
                 src={room.images[0]}
                 alt={room.title}
                 loading="lazy"
-                style={{ cursor: "pointer" }}
+                style={{
+                  cursor: "pointer",
+                  width: "100%",
+                  aspectRatio: "4 / 3",
+                  objectFit: "cover",
+                  transition: "transform 180ms ease",
+                }}
                 onClick={() => dispatch({ type: "UPDATE_ROOM", payload: room })}
               />
               <ImageListItemBar

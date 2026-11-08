@@ -81,7 +81,7 @@ const Room = () => {
       onClose={handleClose}
       TransitionComponent={Transition}
     >
-      <AppBar position="relative">
+      <AppBar position="relative" color="primary">
         <Toolbar>
           <Typography variant="h6" component="h3" sx={{ ml: 2, flex: 1 }}>
             {room?.title}
@@ -91,11 +91,15 @@ const Room = () => {
           </IconButton>
         </Toolbar>
       </AppBar>
-      <Container sx={{ pt: 5 }}>
+      <Container sx={{ pt: { xs: 2, sm: 3, md: 5 }, pb: { xs: 3, md: 5 } }}>
         <Swiper
           modules={[Navigation, Autoplay, EffectCoverflow, Lazy, Zoom]}
           centeredSlides
-          slidesPerView={2}
+          slidesPerView={1}
+          breakpoints={{
+            600: { slidesPerView: 1.5 },
+            900: { slidesPerView: 2 },
+          }}
           grabCursor
           navigation
           autoplay
@@ -129,7 +133,17 @@ const Room = () => {
             <Avatar src={room?.uPhoto} />
           </Tooltip>
         </Swiper>
-        <Stack sx={{ p: 3 }} spacing={2}>
+        <Stack
+          sx={{
+            p: { xs: 2, sm: 3 },
+            mt: { xs: 2, sm: 3 },
+            bgcolor: "background.paper",
+            border: 1,
+            borderColor: "divider",
+            borderRadius: 3,
+          }}
+          spacing={2}
+        >
           <Stack
             direction="row"
             sx={{

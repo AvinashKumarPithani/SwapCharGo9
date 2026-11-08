@@ -55,7 +55,16 @@ const NavBar = () => {
             {!currentUser ? (
               <Button
                 color="inherit"
+                variant="outlined"
                 startIcon={<Lock />}
+                sx={{
+                  borderColor: "rgba(255,255,255,0.7)",
+                  color: "common.white",
+                  "&:hover": {
+                    borderColor: "common.white",
+                    backgroundColor: "rgba(255,255,255,0.12)",
+                  },
+                }}
                 onClick={() => dispatch({ type: "OPEN_LOGIN" })}
               >
                 Login

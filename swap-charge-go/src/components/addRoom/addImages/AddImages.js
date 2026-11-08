@@ -18,10 +18,13 @@ const AddImages = () => {
       <Paper
         sx={{
           cursor: 'pointer',
-          background: '#fafafa',
-          color: '#bdbdbd',
-          border: '1px dashed #ccc',
-          '&:hover': { border: '1px solid #ccc' },
+          backgroundColor: 'background.paper',
+          color: 'text.secondary',
+          border: '1px dashed',
+          borderColor: 'divider',
+          borderRadius: 3,
+          boxShadow: 'none',
+          '&:hover': { borderColor: 'primary.main', backgroundColor: 'action.hover' },
         }}
       >
         <div style={{ padding: '16px' }} {...getRootProps()}>

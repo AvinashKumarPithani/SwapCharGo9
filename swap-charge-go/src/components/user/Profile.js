@@ -90,7 +90,7 @@ const Profile = () => {
           </label>
         </DialogContent>
         <DialogActions sx={{ px: "19px" }}>
-          <Button type="submit" variant="contained" endIcon={<Send />}>
+          <Button type="submit" variant="outlined" endIcon={<Send />}>
             Update
           </Button>
         </DialogActions>

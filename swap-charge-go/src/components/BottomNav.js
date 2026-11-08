@@ -39,7 +39,17 @@ const BottomNav = () => {
       }
       <Paper
         elevation={3}
-        sx={{ position: "fixed", bottom: 0, left: 0, right: 0, zIndex: 2 }}
+        sx={{
+          position: "fixed",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          zIndex: 2,
+          borderTop: 1,
+          borderColor: "divider",
+          borderRadius: 0,
+          boxShadow: "0 -3px 14px rgba(22, 39, 29, 0.08)",
+        }}
       >
         <BottomNavigation
           showLabels

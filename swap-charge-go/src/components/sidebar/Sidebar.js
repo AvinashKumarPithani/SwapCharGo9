@@ -14,14 +14,24 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 const Sidebar = ({ isOpen, setIsOpen }) => {
   const { containerRef } = useValue();
   return (
-    <Drawer variant="persistent" hideBackdrop={true} open={isOpen}>
+    <Drawer
+      variant="persistent"
+      hideBackdrop={true}
+      open={isOpen}
+      sx={{
+        "& .MuiDrawer-paper": {
+          width: { xs: "min(300px, 86vw)", sm: 300 },
+          boxSizing: "border-box",
+        },
+      }}
+    >
       <DrawerHeader>
         <Typography>Apply Search or Filter:</Typography>
         <IconButton onClick={() => setIsOpen(false)}>
           <ChevronLeft fontSize="large" />
         </IconButton>
       </DrawerHeader>
-      <Box sx={{ width: 240, p: 3 }}>
+      <Box sx={{ width: "100%", p: 3 }}>
         <Box ref={containerRef}></Box>
         <PriceSlider />
       </Box>
