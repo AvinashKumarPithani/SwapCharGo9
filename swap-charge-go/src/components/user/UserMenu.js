@@ -1,9 +1,10 @@
-import { Logout, Settings } from '@mui/icons-material';
+import { EventNote, Logout, Settings } from '@mui/icons-material';
 import { ListItemIcon, Menu, MenuItem } from '@mui/material';
 import React from 'react';
 import { useValue } from '../../context/ContextProvider';
 import useCheckToken from '../../hooks/useCheckToken';
 import Profile from './Profile';
+import BookingHistory from './BookingHistory';
 
 const UserMenu = ({ anchorUserMenu, setAnchorUserMenu }) => {
   useCheckToken();
@@ -23,6 +24,12 @@ const UserMenu = ({ anchorUserMenu, setAnchorUserMenu }) => {
         onClose={handleCloseUserMenu}
         onClick={handleCloseUserMenu}
       >
+        <MenuItem onClick={() => dispatch({ type: 'OPEN_BOOKING_HISTORY' })}>
+          <ListItemIcon>
+            <EventNote fontSize="small" />
+          </ListItemIcon>
+          My Bookings
+        </MenuItem>
         {!currentUser.google && (
           <MenuItem
             onClick={() =>
@@ -52,6 +59,7 @@ const UserMenu = ({ anchorUserMenu, setAnchorUserMenu }) => {
         </MenuItem>
       </Menu>
       <Profile />
+      <BookingHistory />
     </>
   );
 };

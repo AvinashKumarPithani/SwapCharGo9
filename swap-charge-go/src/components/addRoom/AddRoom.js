@@ -53,7 +53,10 @@ const AddRoom = ({ setPage }) => {
     }
   }, [images]);
   useEffect(() => {
-    if (details.title.length > 4 && details.description.length > 9) {
+    const capacityText = String(details.totalSlots ?? "");
+    const capacity = Number(capacityText);
+    const capacityValid = /^\d+$/.test(capacityText) && Number.isInteger(capacity) && capacity >= 1 && capacity <= 500;
+    if (details.title.length > 4 && details.description.length > 9 && capacityValid) {
       if (!steps[1].completed) setComplete(1, true);
     } else {
       if (steps[1].completed) setComplete(1, false);
@@ -88,6 +91,7 @@ const AddRoom = ({ setPage }) => {
       title: details.title,
       description: details.description,
       images,
+      totalSlots: Number(details.totalSlots),
     };
     createRoom(room, currentUser, dispatch, setPage);
   };

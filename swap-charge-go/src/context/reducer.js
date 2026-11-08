@@ -5,6 +5,11 @@ const reducer = (state, action) => {
     case "CLOSE_LOGIN":
       return { ...state, openLogin: false };
 
+    case "OPEN_BOOKING_HISTORY":
+      return { ...state, openBookingHistory: true };
+    case "CLOSE_BOOKING_HISTORY":
+      return { ...state, openBookingHistory: false };
+
     case "START_LOADING":
       return { ...state, loading: true };
     case "END_LOADING":
@@ -35,7 +40,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         images: [],
-        details: { title: "", description: "", price: 0 },
+        details: { title: "", description: "", price: 0, totalSlots: "" },
         location: { lng: 0, lat: 0 },
       };
 

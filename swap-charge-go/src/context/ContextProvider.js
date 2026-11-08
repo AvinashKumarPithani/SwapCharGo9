@@ -10,11 +10,12 @@ import reducer from "./reducer";
 const initialState = {
   currentUser: null,
   openLogin: false,
+  openBookingHistory: false,
   loading: false,
   alert: { open: false, severity: "info", message: "" },
   profile: { open: false, file: null, photoURL: "" },
   images: [],
-  details: { title: "", description: "", price: 0 },
+  details: { title: "", description: "", price: 0, totalSlots: "" },
   location: { lng: 0, lat: 0 },
   rooms: [],
   priceFilter: 50,

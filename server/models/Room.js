@@ -19,6 +19,17 @@ const roomSchema = mongoose.Schema(
     uid: { type: String, required: true },
     uName: { type: String, required: true },
     uPhoto: { type: String, default: "" },
+    // Existing rooms intentionally remain without capacity until an owner sets it.
+    totalSlots: {
+      type: Number,
+      min: 1,
+      max: 500,
+      validate: {
+        validator: Number.isInteger,
+        message: "Total capacity must be a whole number",
+      },
+    },
+    bookingRevision: { type: Number, default: 0, min: 0, select: false },
   },
   { timestamps: true }
 );

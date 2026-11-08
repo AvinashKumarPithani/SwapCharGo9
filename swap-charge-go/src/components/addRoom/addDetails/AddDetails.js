@@ -14,11 +14,19 @@ import InfoField from "./InfoField";
 const AddDetails = () => {
   const {
     state: {
-      details: { title, description, price },
+      details: { title, description, price, totalSlots },
     },
     dispatch,
   } = useValue();
   const [costType, setCostType] = useState(price ? 1 : 0);
+  const [capacityTouched, setCapacityTouched] = useState(false);
+  const capacityText = String(totalSlots ?? "");
+  const capacityValue = Number(capacityText);
+  const capacityValid =
+    /^\d+$/.test(capacityText) &&
+    Number.isInteger(capacityValue) &&
+    capacityValue >= 1 &&
+    capacityValue <= 500;
   const handleCostTypeChange = (e) => {
     const costType = Number(e.target.value);
     setCostType(costType);
@@ -67,6 +75,28 @@ const AddDetails = () => {
       <InfoField
         mainProps={{ name: "title", label: "Title", value: title }}
         minLength={5}
+      />
+      <TextField
+        name="totalSlots"
+        label="Total station capacity"
+        type="number"
+        required
+        value={totalSlots}
+        onChange={(event) => {
+          setCapacityTouched(true);
+          dispatch({
+            type: "UPDATE_DETAILS",
+            payload: { totalSlots: event.target.value },
+          });
+        }}
+        inputProps={{ min: 1, max: 500, step: 1, inputMode: "numeric" }}
+        error={capacityTouched && !capacityValid}
+        helperText={
+          capacityTouched && !capacityValid
+            ? "Enter a whole number from 1 to 500."
+            : "Required for booking availability (1-500 slots)."
+        }
+        variant="outlined"
       />
       <InfoField
         mainProps={{

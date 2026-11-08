@@ -4,8 +4,22 @@ import jwt from "jsonwebtoken";
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 const auth = async (req, res, next) => {
+  const authorization = req.headers.authorization;
+  if (typeof authorization !== "string" || !authorization.startsWith("Bearer ")) {
+    return res.status(401).json({
+      success: false,
+      message: "Authentication is required.",
+    });
+  }
+
   try {
-    const token = req.headers.authorization.split(" ")[1];
+    const token = authorization.slice(7);
+    if (!token) {
+      return res.status(401).json({
+        success: false,
+        message: "Authentication is required.",
+      });
+    }
     const googleToken = token.length > 1000;
     if (googleToken) {
       const ticket = await client.verifyIdToken({
