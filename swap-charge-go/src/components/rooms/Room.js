@@ -8,7 +8,6 @@ import {
   Alert,
   IconButton,
   CircularProgress,
-  Rating,
   Slide,
   Stack,
   Toolbar,
@@ -17,7 +16,7 @@ import {
 } from "@mui/material";
 import { forwardRef, useCallback, useEffect, useRef, useState } from "react";
 import { useValue } from "../../context/ContextProvider";
-import { Close, StarBorder } from "@mui/icons-material";
+import { Close } from "@mui/icons-material";
 import { cancelBooking, createBooking, getBookingStatus, getMyBookings, getRoomAvailability } from "../../actions/booking";
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -313,7 +312,7 @@ const Room = () => {
           {room?.images?.map((url) => (
             <SwiperSlide key={url}>
               <div className="swiper-zoom-container">
-                <img src={url} alt="room" />
+                <img src={url} alt={`${room?.title || "Station"} image`} />
               </div>
             </SwiperSlide>
           ))}
@@ -347,31 +346,13 @@ const Room = () => {
               flexWrap: "wrap",
             }}
           >
-            <Box>
-              <Typography variant="h6" component="span">
-                {"Price : "}
-              </Typography>
-              <Typography component="span">
+            <Box sx={{ display: "flex", alignItems: "baseline", gap: 1, flexWrap: "wrap" }}>
+              <Typography variant="overline" color="text.secondary">PRICE</Typography>
+              <Typography component="span" variant="h6" sx={{ color: "secondary.main" }}>
                 {room?.price === 0
                   ? "Free with Subscription"
                   : "$" + room?.price}
               </Typography>
-            </Box>
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
-              <Typography variant="h6" component="span">
-                {"Ratings: "}
-              </Typography>
-              <Rating
-                name="room-ratings"
-                defaultValue={3.5}
-                precision={0.5}
-                emptyIcon={<StarBorder />}
-              />
             </Box>
           </Stack>
           <Stack
@@ -382,23 +363,17 @@ const Room = () => {
             }}
           >
             <Box>
-              <Typography variant="h6" component="span">
-                {"Place : "}
-              </Typography>
-              <Typography component="span">{place?.text}</Typography>
+              <Typography variant="overline" color="text.secondary" display="block">PLACE</Typography>
+              <Typography>{place?.text || "Location details loading"}</Typography>
             </Box>
             <Box>
-              <Typography variant="h6" component="span">
-                {"Address: "}
-              </Typography>
-              <Typography component="span">{place?.place_name}</Typography>
+              <Typography variant="overline" color="text.secondary" display="block">ADDRESS</Typography>
+              <Typography>{place?.place_name || `${room?.lat}, ${room?.lng}`}</Typography>
             </Box>
           </Stack>
           <Stack>
-            <Typography variant="h6" component="span">
-              {"Details: "}
-            </Typography>
-            <Typography component="span">{room?.description}</Typography>
+            <Typography variant="overline" color="text.secondary">STATION DETAILS</Typography>
+            <Typography sx={{ mt: 0.5, lineHeight: 1.75 }}>{room?.description}</Typography>
           </Stack>
           <Box aria-live="polite" sx={{ p: { xs: 1.5, sm: 2 }, borderRadius: 2, bgcolor: "background.default", border: 1, borderColor: "divider" }}>
             <Typography variant="h6" sx={{ mb: 1 }}>Station capacity</Typography>

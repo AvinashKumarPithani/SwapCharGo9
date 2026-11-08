@@ -14,8 +14,10 @@ const PriceSlider = () => {
     dispatch,
   } = useValue();
   return (
-    <Box sx={{ mt: 5 }}>
-      <Typography>Max Price: {"$ " + priceFilter}</Typography>
+    <Box sx={{ mt: 3, p: 1.5, border: 1, borderColor: "divider", borderRadius: 2, bgcolor: "background.paper" }}>
+      <Typography variant="subtitle2" fontWeight={700}>
+        Maximum price <Box component="span" sx={{ color: "secondary.main", ml: 0.5 }}>${priceFilter}</Box>
+      </Typography>
       <Slider
         min={0}
         max={50}
@@ -23,6 +25,7 @@ const PriceSlider = () => {
         valueLabelDisplay="auto"
         marks={marks}
         value={priceFilter}
+        aria-label="Maximum station price"
         onChange={(e, price) =>
           dispatch({ type: "FILTER_PRICE", payload: price })
         }

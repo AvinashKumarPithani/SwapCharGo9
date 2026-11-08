@@ -15,6 +15,12 @@ const supercluster = new Supercluster({
   maxZoom: 20,
 });
 
+const initialMapView = {
+  longitude: 78.96,
+  latitude: 20.59,
+  zoom: 1.8,
+};
+
 const ClusterMap = () => {
   const {
     state: { filteredRooms },
@@ -59,11 +65,10 @@ const ClusterMap = () => {
     setClusters(supercluster.getClusters(bounds, zoom));
   }, [points, zoom, bounds]);
 
-  useEffect(() => {
-    if (mapRef.current) {
-      setBounds(mapRef.current.getMap().getBounds().toArray().flat());
-    }
-  }, [mapRef?.current]);
+  const updateViewport = (event) => {
+    setZoom(Math.round(event.viewState.zoom));
+    setBounds(event.target.getBounds().toArray().flat());
+  };
   return (
     <Box
       sx={{
@@ -72,11 +77,16 @@ const ClusterMap = () => {
       }}
     >
       <ReactMapGL
-        initialViewState={{ latitude: 51.5072, longitude: 0.1276 }}
+        initialViewState={initialMapView}
+        projection="mercator"
         mapboxAccessToken={process.env.REACT_APP_MAP_TOKEN}
-        mapStyle="mapbox://styles/mapbox/streets-v11"
+        mapStyle="mapbox://styles/mapbox/streets-v12"
         ref={mapRef}
-        onZoomEnd={(e) => setZoom(Math.round(e.viewState.zoom))}
+        onLoad={(event) => {
+          setZoom(Math.round(event.target.getZoom()));
+          setBounds(event.target.getBounds().toArray().flat());
+        }}
+        onMoveEnd={updateViewport}
       >
         {clusters.map((cluster) => {
           const { cluster: isCluster, point_count } = cluster.properties;
@@ -97,7 +107,7 @@ const ClusterMap = () => {
                   onClick={() => {
                     const zoom = Math.min(
                       supercluster.getClusterExpansionZoom(cluster.id),
-                      20
+                      20,
                     );
                     mapRef.current.flyTo({
                       center: [longitude, latitude],
@@ -123,6 +133,13 @@ const ClusterMap = () => {
                   src={cluster.properties.uPhoto}
                   component={Paper}
                   elevation={2}
+                  sx={{
+                    width: 38,
+                    height: 38,
+                    border: "3px solid #79b84a",
+                    backgroundColor: "#ffffff",
+                    cursor: "pointer",
+                  }}
                   onClick={() => setPopupInfo(cluster.properties)}
                 />
               </Tooltip>

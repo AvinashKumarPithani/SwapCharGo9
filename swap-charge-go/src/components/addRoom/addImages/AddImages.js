@@ -1,4 +1,4 @@
-import { Paper } from '@mui/material';
+import { Paper, Typography } from '@mui/material';
 import { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import ImagesList from './ImagesList';
@@ -30,7 +30,7 @@ const AddImages = () => {
         <div style={{ padding: '16px' }} {...getRootProps()}>
           <input {...getInputProps()} />
           {isDragActive ? (
-            <p style={{ color: 'green' }}>Drop the files here...</p>
+            <Typography component="p" color="primary.main">Drop the files here...</Typography>
           ) : (
             <p>Drag 'n' Drop some files here, or click to select files</p>
           )}

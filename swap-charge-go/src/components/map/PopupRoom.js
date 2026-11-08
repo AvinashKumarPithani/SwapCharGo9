@@ -12,7 +12,7 @@ const PopupRoom = ({ popupInfo }) => {
   const { title, description, price, images } = popupInfo;
   const { dispatch } = useValue();
   return (
-    <Card sx={{ maxWidth: 400, borderRadius: 3 }}>
+    <Card sx={{ maxWidth: 400, borderRadius: 2.5, borderColor: "divider", bgcolor: "background.paper" }}>
       <ImageListItem sx={{ display: "block" }}>
         <ImageListItemBar
           sx={{
@@ -25,8 +25,12 @@ const PopupRoom = ({ popupInfo }) => {
         />
         <ImageListItemBar
           title={title}
-          subtitle={description.substr(0, 30) + "..."}
-          sx={{ zIndex: 2 }}
+          subtitle={description.length > 64 ? `${description.slice(0, 64)}…` : description}
+          sx={{
+            zIndex: 2,
+            background: "linear-gradient(0deg, rgba(16, 23, 22, 0.92), rgba(16, 23, 22, 0.55))",
+            "& .MuiImageListItemBar-title": { fontWeight: 700 },
+          }}
         />
         <Swiper
           modules={[Autoplay, Pagination, Lazy]}

@@ -1,15 +1,14 @@
 import {
   Avatar,
   Card,
+  ButtonBase,
   Container,
   ImageList,
   ImageListItem,
   ImageListItemBar,
-  Rating,
   Tooltip,
 } from "@mui/material";
 import { useValue } from "../../context/ContextProvider";
-import { StarBorder } from "@mui/icons-material";
 
 const Rooms = () => {
   const {
@@ -28,7 +27,15 @@ const Rooms = () => {
         }}
       >
         {filteredRooms.map((room) => (
-          <Card key={room._id}>
+          <Card
+            key={room._id}
+            sx={{
+              height: "100%",
+              transition: "border-color 160ms ease, transform 160ms ease",
+              "&:hover": { borderColor: "rgba(128, 185, 77, 0.55)", transform: "translateY(-2px)" },
+              "&:focus-within": { borderColor: "secondary.main" },
+            }}
+          >
             <ImageListItem sx={{ height: "100% !important", overflow: "hidden" }}>
               <ImageListItemBar
                 sx={{
@@ -43,32 +50,32 @@ const Rooms = () => {
                 }
                 position="top"
               />
-              <img
-                src={room.images[0]}
-                alt={room.title}
-                loading="lazy"
-                style={{
-                  cursor: "pointer",
-                  width: "100%",
-                  aspectRatio: "4 / 3",
-                  objectFit: "cover",
-                  transition: "transform 180ms ease",
-                }}
+              <ButtonBase
+                component="button"
+                aria-label={`View ${room.title} station details`}
                 onClick={() => dispatch({ type: "UPDATE_ROOM", payload: room })}
-              />
+                sx={{ display: "block", width: "100%", textAlign: "left" }}
+              >
+                <img
+                  src={room.images[0]}
+                  alt={room.title}
+                  loading="lazy"
+                  style={{
+                    display: "block",
+                    width: "100%",
+                    aspectRatio: "4 / 3",
+                    objectFit: "cover",
+                  }}
+                />
+              </ButtonBase>
               <ImageListItemBar
                 title={room.title}
-                actionIcon={
-                  <Rating
-                    sx={{ color: "rgba(255,255,255, 0.8)", mr: "5px" }}
-                    name="room-rating"
-                    defaultValue={3.5}
-                    precision={0.5}
-                    emptyIcon={
-                      <StarBorder sx={{ color: "rgba(255,255,255, 0.8)" }} />
-                    }
-                  />
-                }
+                subtitle={room.description}
+                sx={{
+                  background: "linear-gradient(0deg, rgba(16, 23, 22, 0.94), rgba(16, 23, 22, 0.62))",
+                  "& .MuiImageListItemBar-title": { fontWeight: 700 },
+                  "& .MuiImageListItemBar-subtitle": { display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" },
+                }}
               />
             </ImageListItem>
           </Card>

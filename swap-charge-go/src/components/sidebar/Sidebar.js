@@ -20,18 +20,23 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
       open={isOpen}
       sx={{
         "& .MuiDrawer-paper": {
-          width: { xs: "min(300px, 86vw)", sm: 300 },
+          width: { xs: "min(320px, calc(100vw - 28px))", sm: 320 },
           boxSizing: "border-box",
+          borderRight: 1,
+          boxShadow: "12px 0 32px rgba(0, 0, 0, 0.22)",
         },
       }}
     >
       <DrawerHeader>
-        <Typography>Apply Search or Filter:</Typography>
-        <IconButton onClick={() => setIsOpen(false)}>
+        <Typography variant="subtitle1" fontWeight={700}>Search & filters</Typography>
+        <IconButton aria-label="Close search and filters" onClick={() => setIsOpen(false)}>
           <ChevronLeft fontSize="large" />
         </IconButton>
       </DrawerHeader>
-      <Box sx={{ width: "100%", p: 3 }}>
+      <Box sx={{ width: "100%", px: 2.5, pb: 3 }}>
+        <Typography variant="body2" color="text.secondary" sx={{ mb: 2.5 }}>
+          Search a place, then narrow stations by price.
+        </Typography>
         <Box ref={containerRef}></Box>
         <PriceSlider />
       </Box>

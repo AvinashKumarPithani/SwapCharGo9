@@ -17,6 +17,15 @@ const AddLocation = () => {
     dispatch,
   } = useValue();
   const mapRef = useRef();
+  const hasLocation = [lng, lat].every(
+    (value) =>
+      value !== null &&
+      value !== undefined &&
+      value !== "" &&
+      Number.isFinite(Number(value)),
+  );
+  const initialLongitude = hasLocation ? Number(lng) : 78.96;
+  const initialLatitude = hasLocation ? Number(lat) : 20.59;
 
   useEffect(() => {
     if (!lng && !lat) {
@@ -44,25 +53,28 @@ const AddLocation = () => {
     >
       <ReactMapGL
         ref={mapRef}
+        projection="mercator"
         mapboxAccessToken={process.env.REACT_APP_MAP_TOKEN}
         initialViewState={{
-          longitude: lng,
-          latitude: lat,
-          zoom: 8,
+          longitude: initialLongitude,
+          latitude: initialLatitude,
+          zoom: hasLocation ? 8 : 4.2,
         }}
-        mapStyle="mapbox://styles/mapbox/streets-v11"
+        mapStyle="mapbox://styles/mapbox/streets-v12"
       >
-        <Marker
-          latitude={lat}
-          longitude={lng}
-          draggable
-          onDragEnd={(e) =>
-            dispatch({
-              type: "UPDATE_LOCATION",
-              payload: { lng: e.lngLat.lng, lat: e.lngLat.lat },
-            })
-          }
-        />
+        {hasLocation && (
+          <Marker
+            latitude={Number(lat)}
+            longitude={Number(lng)}
+            draggable
+            onDragEnd={(e) =>
+              dispatch({
+                type: "UPDATE_LOCATION",
+                payload: { lng: e.lngLat.lng, lat: e.lngLat.lat },
+              })
+            }
+          />
+        )}
         <NavigationControl position="bottom-right" />
         <GeolocateControl
           position="top-left"

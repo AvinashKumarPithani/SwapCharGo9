@@ -26,31 +26,42 @@ const NavBar = () => {
     <>
       <AppBar>
         <Container maxWidth="lg">
-          <Toolbar disableGutters>
-            <Box sx={{ mr: 1 }}>
+          <Toolbar disableGutters sx={{ minHeight: { xs: 58, sm: 64 } }}>
+            <Box sx={{ mr: { xs: 0.5, sm: 1 } }}>
               <IconButton
-                size="large"
+                size="medium"
                 color="inherit"
+                aria-label="Open map menu"
                 onClick={() => setIsOpen(true)}
               >
-                <Menu />
+                <Menu fontSize="medium" />
               </IconButton>
             </Box>
             <Typography
               variant="h6"
-              component="h1"
+              component="div"
               noWrap
-              sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}
+              sx={{
+                flexGrow: 1,
+                display: { xs: "none", md: "flex" },
+                fontWeight: 750,
+                letterSpacing: "-.04em",
+              }}
             >
-              Swap Charge & Go
+              SwapCharGo
             </Typography>
             <Typography
               variant="h6"
-              component="h1"
+              component="div"
               noWrap
-              sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
+              sx={{
+                flexGrow: 1,
+                display: { xs: "flex", md: "none" },
+                fontWeight: 750,
+                letterSpacing: "-.04em",
+              }}
             >
-              SCG
+              SwapCharGo
             </Typography>
             {!currentUser ? (
               <Button
@@ -60,6 +71,7 @@ const NavBar = () => {
                 sx={{
                   borderColor: "rgba(255,255,255,0.7)",
                   color: "common.white",
+                  minHeight: 40,
                   "&:hover": {
                     borderColor: "common.white",
                     backgroundColor: "rgba(255,255,255,0.12)",
